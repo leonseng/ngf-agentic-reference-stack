@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: llm-route
+spec:
+  parentRefs:
+    - namespace: nginx-gateway
+      name: nginx-gateway-fabric
+      sectionName: https-agent-chat
+
+  rules:
+    - backendRefs:
+        - group: inference.networking.k8s.io
+          kind: InferencePool
+          name: vllm-llama3-8b-instruct
+      matches:
+        - path:
+            type: PathPrefix
+            value: /

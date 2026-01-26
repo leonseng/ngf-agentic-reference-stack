@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJoYXJib3IubGFiLmxlb25zZW5nLmNvbSI6eyJ1c2VybmFtZSI6InJvYm90JGhvbWUtbGFiLWs4cyIsInBhc3N3b3JkIjoiNThORjZ0Tk9idXBJQnVUY242N3pEalpMMXhoQVU4a28iLCJhdXRoIjoiY205aWIzUWthRzl0WlMxc1lXSXRhemh6T2pVNFRrWTJkRTVQWW5Wd1NVSjFWR051TmpkNlJHcGFUREY0YUVGVk9HdHYifX19
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: regcred
+  namespace: agent-playground
+type: kubernetes.io/dockerconfigjson

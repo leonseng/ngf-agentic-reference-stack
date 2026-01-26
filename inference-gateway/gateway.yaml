@@ -1,0 +1,70 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: inference-gateway
+spec:
+  gatewayClassName: nginx
+  listeners:
+    - name: frontend
+      port: 80
+      protocol: HTTP
+    - name: frontend-backend-api
+      port: 443
+      protocol: HTTPS
+    - name: inference-pool
+
+      port: 443
+      protocol: HTTPS
+
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  annotations:
+    argocd.argoproj.io/tracking-id: nginx-gateway-fabric:gateway.networking.k8s.io/Gateway:nginx-gateway/nginx-gateway-fabric
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  creationTimestamp: "2025-08-27T01:09:56Z"
+  generation: 2
+  name: nginx-gateway-fabric
+  namespace: nginx-gateway
+  resourceVersion: "497512070"
+  uid: 7abd551c-aa1e-4784-9823-d4af96d32d82
+spec:
+  gatewayClassName: nginx
+  listeners:
+    - allowedRoutes:
+        namespaces:
+          from: Selector
+          selector:
+            matchLabels:
+              gateway: nginx
+      hostname: "*.ngf.k8s.internal"
+      name: http
+      port: 80
+      protocol: HTTP
+    - allowedRoutes:
+        namespaces:
+          from: All
+      hostname: agent-zero.lab.leonseng.com
+      name: https-agent-zero
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: agent-zero-tls
+        mode: Terminate
+    - allowedRoutes:
+        namespaces:
+          from: All
+      hostname: agent-chat.lab.leonseng.com
+      name: https-agent-chat
+      port: 443
+      protocol: HTTPS
+      tls:
+        certificateRefs:
+          - group: ""
+            kind: Secret
+            name: agent-chat-tls
+        mode: Terminate

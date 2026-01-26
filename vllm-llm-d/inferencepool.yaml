@@ -1,0 +1,19 @@
+---
+# Source: inferencepool/templates/inferencepool.yaml
+apiVersion: "inference.networking.k8s.io/v1"
+kind: InferencePool
+metadata:
+  name: vllm-llama3-8b-instruct
+  labels:
+    app.kubernetes.io/name: vllm-llama3-8b-instruct-epp
+    app.kubernetes.io/version: "v1.1.0"
+spec:
+  targetPorts:
+    - number: 8000
+  selector:
+    matchLabels:
+      app: "vllm-llama3-8b-instruct"
+  endpointPickerRef:
+    name: vllm-llama3-8b-instruct-epp
+    port:
+      number: 9002

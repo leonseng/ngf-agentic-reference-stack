@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agent-zero
+  labels:
+    app: agent-zero
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agent-zero
+  template:
+    metadata:
+      labels:
+        app: agent-zero
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: openai-proxy
+        image: harbor.lab.leonseng.com/private/agent-zero:0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8001
+          name: http
+        env:
+        - name: HOST
+          value: "0.0.0.0"
+        - name: PORT
+          value: "8001"
+        volumeMounts:
+        - name: env-config
+          mountPath: /app/.env
+          subPath: .env
+          readOnly: true
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8001
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8001
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: env-config
+        secret:
+          secretName: agent-zero-env

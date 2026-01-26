@@ -1,0 +1,13 @@
+# Source: inferencepool/templates/rbac.yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: "vllm-llama3-8b-instruct-default-epp"
+subjects:
+  - kind: ServiceAccount
+    name: vllm-llama3-8b-instruct-epp
+    namespace: agent-playground
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: "vllm-llama3-8b-instruct-default-epp"
