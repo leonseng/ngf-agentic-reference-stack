@@ -1,19 +1,19 @@
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
 metadata:
-  name: agent-zero
+  name: backend
 spec:
   parentRefs:
-    - name: nginx-gateway-fabric
-      sectionName: https-agent-zero
-      namespace: nginx-gateway
+    - namespace: nginx-gateway
+      name: inference-gateway
+      sectionName: client-side
   hostnames:
-    - "agent-zero.lab.leonseng.com"
+    - "backend.ngf-agentic-reference-stack.example.com"
   rules:
     - matches:
         - path:
             type: PathPrefix
             value: /
       backendRefs:
-        - name: agent-zero
-          port: 8001
+        - name: backend
+          port: 8000

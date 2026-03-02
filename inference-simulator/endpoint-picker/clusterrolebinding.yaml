@@ -6,7 +6,7 @@ metadata:
 subjects:
   - kind: ServiceAccount
     name: vllm-llama3-8b-instruct-epp
-    namespace: agent-playground
+    namespace: vllm
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

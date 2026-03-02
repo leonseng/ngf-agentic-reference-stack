@@ -13,15 +13,5 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: nginx
-        image: nginx:alpine
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: html
-          mountPath: /usr/share/nginx/html
-          readOnly: true
-      volumes:
-      - name: html
-        configMap:
-          name: frontend-html
+        - name: frontend
+          image: leonseng/openai-proxy-with-f5-guardrails-frontend:0.1

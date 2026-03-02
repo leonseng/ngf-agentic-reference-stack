@@ -57,7 +57,7 @@ spec:
             - name: grpc-health
               containerPort: 9003
             - name: metrics
-              containerPort: 9090
+              containerPort: 8080
           livenessProbe:
             grpc:
               port: 9003
