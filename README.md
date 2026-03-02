@@ -6,9 +6,9 @@ A reference implementation showcasing NGINX Gateway Fabric as a multi-layer gate
 
 This project demonstrates NGF serving three critical gateway roles:
 
-![](./docs/images/hero.png)
+![](./docs/images/hero.excalidraw.png)
 
-1. **Reverse Proxy** - Routes traffic to the AI chatbot frontend
+1. **Reverse Proxy/Web Server** - Routes traffic to the AI chatbot frontend
 2. **API Gateway** - Manages frontend-to-backend chat completion requests
 3. **LLM Inference Gateway** - Routes backend requests to vLLM inference API via Gateway API inference extension
 
