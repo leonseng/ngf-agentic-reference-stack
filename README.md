@@ -26,10 +26,10 @@ This project demonstrates NGF serving three critical gateway roles:
 
 ```bash
 # 1. Create the k3d cluster
-./scripts/k3d-create-cluster.sh
+sudo ./scripts/k3d-create-cluster.sh
 
 # 2. Install NGINX Gateway Fabric with the Gateway API Inference Extension
-./scripts/ngf-setup.sh
+sudo ./scripts/ngf-setup.sh
 
 # 3. Deploy the stack (frontend → backend → inference)
 ```
