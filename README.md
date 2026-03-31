@@ -24,14 +24,8 @@ This project demonstrates NGF serving three critical gateway roles:
 
 **Prerequisites:** [k3d](https://k3d.io/stable/#installation) and `kubectl`
 
-```bash
-# 1. Create the k3d cluster
-./scripts/k3d-create-cluster.sh
-
-# 2. Install NGINX Gateway Fabric with the Gateway API Inference Extension
-./scripts/ngf-setup.sh
-
-# 3. Deploy the stack (frontend → backend → inference)
-```
-
-See [deployment guide](./docs/deployment.md) for the full step-by-step deployment walkthrough.
+1. Create the k3d cluster
+    ```bash
+    ./scripts/k3d-create-cluster.sh
+    ```
+2. Deploy the stack (frontend → backend → inference). See [deployment guide](./docs/deployment.md) for the full step-by-step deployment walkthrough.
