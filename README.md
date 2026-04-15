@@ -14,8 +14,8 @@ This project demonstrates NGF serving three critical gateway roles:
 
 ### Components
 
-- **Frontend**: Browser-based AI chatbot UI. Served by NGF acting as a reverse proxy, and configured to send chat completion requests to the backend API.
-- **Backend**: OpenAI-compatible API proxy. Accepts chat completion requests from the frontend and forwards them to the inference gateway. NGF acts as an API gateway in front of this service.
+- **Frontend**: Browser-based AI chatbot UI. Served by NGF acting as a reverse proxy, and configured to send chat completion requests to the backend API. Uses the [leonseng/openai-proxy-with-f5-guardrails-frontend](https://hub.docker.com/r/leonseng/openai-proxy-with-f5-guardrails-frontend) image.
+- **Backend**: OpenAI-compatible API proxy. Accepts chat completion requests from the frontend and forwards them to the inference gateway. NGF acts as an API gateway in front of this service. Uses the [leonseng/openai-proxy-with-f5-guardrails](https://hub.docker.com/r/leonseng/openai-proxy-with-f5-guardrails) image.
 - **Inference Simulator**: Simulates a [vLLM](https://github.com/vllm-project/vllm) server. Deployed as 2 replicas grouped into a Gateway API `InferencePool` for pool-based load balancing.
 - **Endpoint Picker Pod / EPP**: A gRPC extension deployed alongside the inference simulator. NGF calls the EPP per-request to resolve the best replica based on inference-specific signals such as KV-cache locality, replacing simple round-robin.
 - **Gateway**: ([NGINX Gateway Fabric](https://github.com/nginx/nginx-gateway-fabric)) as the single data-plane entry point for all three layers.
